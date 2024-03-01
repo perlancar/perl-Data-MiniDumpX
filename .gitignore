@@ -1,0 +1,5 @@
+Data-MiniDumpX-*
+.build
+*~
+nytprof*
+.DS_Store
