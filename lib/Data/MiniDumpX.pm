@@ -58,6 +58,11 @@ sub _str {
     _quote(shift);
 }
 
+sub _scalar {
+    my $data = shift;
+    defined($data) ? _quote($data) : 'undef';
+}
+
 sub dump {
     my $data = shift;
 
@@ -65,7 +70,7 @@ sub dump {
         my $ref = ref $data;
 
         if (!$ref) {
-            hook_dump_scalar { _str($data) };
+            hook_dump_scalar { _scalar($data) };
         } elsif ($ref eq 'ARRAY') {
             "[" . (hook_dump_array { join(", ", map { &dump($_) } @$data) }) . "]";
         } elsif ($ref eq 'HASH') {
